@@ -33,6 +33,12 @@ for line in file:
     # 'Matzah-Chew-Sits': '4'}
     ratings_dict[restaurants[0]] = restaurants[1]
 
+# prompt user for new restaurant and score
+new_restaurant = input('New restaurant: ')
+new_score = input('New score: ')
+
+ratings_dict[new_restaurant] = new_score
+
 # will need .items() to get all restaurant names in a list
 # then, use sorted() (gets us a new list, so will need to assign to new var)
 restaurant_names = ratings_dict.items() #.items() returns a list of tuples
@@ -40,6 +46,8 @@ sorted_names = sorted(restaurant_names)
 
 for name, rating in sorted_names:
     sorted_dict[name] = rating
-    print(sorted_dict)
+
+for name in sorted_dict:
+    print(f"{name} is rated at {sorted_dict[name]}")
 
         
