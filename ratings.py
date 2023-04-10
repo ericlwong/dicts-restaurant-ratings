@@ -1,5 +1,6 @@
 """Restaurant rating lister."""
 
+from random import choice
 
 file = open('scores.txt')
 
@@ -37,13 +38,15 @@ for line in file:
 # 1. See all ratings in alphabetical order
 # 2. Add a new restaurant and rating
 # 3. Quit
-print('You have three choices for using these restaurant ratings.')
-print('1 see all ratings in alphabetical order')
-print('2 add a new restaurant and rating')
-print('3 Quit')
-user_choice = int(input('Input your choice here as 1, 2, or 3: '))
+print('You have four choices for using these restaurant ratings.')
+has_not_quit = True
+while has_not_quit:
+    print('1 See all ratings in alphabetical order.')
+    print('2 Add a new restaurant and rating.')
+    print('3 Quit.')
+    print('4 Update a random restaurant.')
+    user_choice = int(input('Input your choice here as 1, 2, 3, or 4: '))
 
-if user_choice == 1 or user_choice == 2:
     if user_choice == 2:
         # prompt user for new restaurant and score
         new_restaurant = input('New restaurant: ')
@@ -58,17 +61,25 @@ if user_choice == 1 or user_choice == 2:
                 invalid_score = False
 
         ratings_dict[new_restaurant] = new_score
-    
-    # will need .items() to get all restaurant names in a list
-    # then, use sorted() (gets us a new list, so will need to assign to new var)
-    restaurant_names = ratings_dict.items() #.items() returns a list of tuples
-    sorted_names = sorted(restaurant_names)
+    elif user_choice == 1:
+        # will need .items() to get all restaurant names in a list
+        # then, use sorted() (gets us a new list, so will need to assign to new var)
+        restaurant_names = ratings_dict.items() #.items() returns a list of tuples
+        sorted_names = sorted(restaurant_names)
 
-    for name, rating in sorted_names:
-        sorted_dict[name] = rating
+        for name, rating in sorted_names:
+            sorted_dict[name] = rating
 
-    for name in sorted_dict:
-        print(f"{name} is rated at {sorted_dict[name]}")
-elif user_choice == 3:
-    print('You are exiting the program.')
-
+        for name in sorted_dict:
+            print(f"{name} is rated at {sorted_dict[name]}")
+    elif user_choice == 3:
+        print('You are exiting the program.')
+        has_not_quit = False
+    elif user_choice == 4:
+        # random.choice(sequence) -> return a random element from that sequence 
+        # the sequence here should be a list of tuples which dict.items() will return
+        random_restaurant_pair = choice(list(ratings_dict.items()))
+        random_name, random_rating = random_restaurant_pair
+        print(f"{random_name}'s rating is {random_rating}.")
+        new_rating = int(input('What should the new rating be?: '))
+        ratings_dict[random_name] = new_rating
