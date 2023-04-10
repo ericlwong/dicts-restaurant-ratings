@@ -31,11 +31,19 @@ for line in file:
     # 'Water Pollo': '1', 
     # 'Loaf Of My Life': '3', 
     # 'Matzah-Chew-Sits': '4'}
-    ratings_dict[restaurants[0]] = restaurants[1]
+    ratings_dict[restaurants[0]] = int(restaurants[1])
 
 # prompt user for new restaurant and score
 new_restaurant = input('New restaurant: ')
-new_score = input('New score: ')
+# while loop (loop forever until score is valid)
+invalid_score = True
+while invalid_score:
+    new_score = int(input('New score (enter a score between 1 and 5): '))
+    #new_score >= 1 and new_score <= 5
+    if new_score < 1 or new_score > 5:
+        print("Invalid score. Please try again.")
+    else:
+        invalid_score = False
 
 ratings_dict[new_restaurant] = new_score
 
